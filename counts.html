@@ -1,0 +1,232 @@
+
+<HTML>
+  <HEAD>
+  </HEAD>
+  <BODY>
+
+<!-- Table -->
+      <table border=1 cellpadding=5>
+<!-- Header Row -->
+        <tr>
+<!--
+          <th colspan=2>3.0 CK</th>
+          <th colspan=2>5.0 CK</th>
+-->
+          <th colspan=2>3.0 CK</th>
+          <th colspan=2>3.0 STK</th>
+        </tr>
+<!-- Main Row -->
+        <tr valign="top">
+<!--
+          <td>
+             <input type="number" id="CK3Entry" min=1 max=70 size=4 onkeypress="EnterEvent(event,'CK3')"><br>
+            <button id="CK3Button" onclick="insFunction('CK3')" tabindex="-1">--></button>
+            <div id="CK3Count" style="float:right"></div>
+          </td>
+-->
+<!--
+          <td width=50>
+              <select id="CK3List" style="min-width:100%" size=24 ondblclick="delFunction('CK3')" onkeypress="DelEvent(event,'CK3')" tabindex="-1"></select>
+          </td>
+-->
+<!--
+          <td>
+             <input type="number" id="CK5Entry" min=1 max=70 size=4 onkeypress="EnterEvent(event,'CK5')"><br>
+            <button id="CK5Button" onclick="insFunction('CK5')" tabindex="-1">--></button>
+            <div id="CK5Count" style="float:right"></div>
+          </td>
+-->
+<!--
+          <td width=50>
+              <select id="CK5List" style="min-width:100%" size=24 ondblclick="delFunction('CK5')" onkeypress="DelEvent(event,'CK5')" tabindex="-1"></select>
+          </td>
+-->
+          <td >
+             <input type="number" id="STK3Entry" min=1 max=70 size=4 onkeypress="EnterEvent(event,'STK3')"><br>
+            <button id="STK3Button" onclick="insFunction('STK3')" tabindex="-1">--></button>
+            <div id="STK3Count" style="float:right"></div>
+          </td>
+          <td width=50>
+              <select id="STK3List" style="min-width:100%" size=24 ondblclick="delFunction('STK3')" onkeypress="DelEvent(event,'STK3')" tabindex="-1"></select>
+          </td>
+          <td>
+             <input type="number" id="STK5Entry" min=1 max=70 size=4 onkeypress="EnterEvent(event,'STK5')"><br>
+            <button id="STK5Button" onclick="insFunction('STK5')" tabindex="-1">--></button>
+            <div id="STK5Count" style="float:right"></div>
+          </td>
+          <td width=50>
+              <select id="STK5List" style="min-width:100%" size=24 ondblclick="delFunction('STK5')" onkeypress="DelEvent(event,'STK5')" tabindex="-1"></select>
+          </td>
+        </tr>
+<!-- Total Row -->
+        <tr>
+<!--
+          <td>Total:</td>
+          <td>
+            <div id="CK3Total"></div>
+          </td>
+          <td>Total:</td>
+          <td>
+            <div id="CK5Total"></div>
+          </td>
+-->
+          <td>Total:</td>
+          <td>
+            <div id="STK3Total"></div>
+          </td>
+          <td>Total:</td>
+          <td>
+            <div id="STK5Total"></div>
+          </td>
+        </tr>
+<!-- Gap Row -->
+        <tr>
+          <td colspan=4></td>
+<!-- Remove 7 cols
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+-->
+        </tr>
+<!-- Summary Row -->
+        <tr>
+<!--
+          <td colspan=4></td>
+-->
+<!-- Remove next 3 cols
+          <td></td>
+          <td></td>
+          <td></td>
+-->
+          <td colspan=2>
+<!--
+             3.0 CK<br>
+             3.0 STK<br>
+-->
+             3.0 CK<br>
+             3.0 STK<br>
+          </td>
+          <td>
+<!--
+            <div id="CK3TotalS"></div>
+            <div id="CK5TotalS"></div>
+-->
+            <div id="STK3TotalS"></div>
+            <div id="STK5TotalS"></div>
+          </td>
+          <td colspan=2 align=center>
+            <button id="ResetButton" onclick="resetFunction('CK3',['CK3','CK5','STK3','STK5'])" tabindex="-1">Reset</button>
+          </td>
+<!-- Remove 1 col
+          <td></td>
+-->
+        </tr>
+      </table>
+<!-- End Table -->
+
+<!-- Begin script -->
+    <script type="text/javascript">
+<!-- Trap ENTER key -->
+      function EnterEvent(e,b) {
+        var btn = b + "Button";
+        if (e.keyCode == 13) {    // Is it the enter key?
+          e.preventDefault();   // Kill "submit" function of enter key
+          document.getElementById(btn).click();  // Forward to button action
+        }
+      }
+
+      function DelEvent(e,b) {
+        if (e.keyCode == 127) {    // Is it the delete key?
+          e.preventDefault();   // Kill function of delete key
+          delFunction(b);  // Call delete action
+        }
+      }
+
+<!-- Sum values in list -->
+      function sumFunction(b) {
+        var list = b + "List";
+        var location = b + "Total";
+        var count = b + "Count";
+        var inputVal = document.getElementById(list);
+
+        var total = 0;
+        for (var i = 0; i < inputVal.length; i++) {
+          total += parseInt(inputVal[i].value);
+        }
+        
+        document.getElementById(location).innerHTML = total;
+        document.getElementById(location + "S").innerHTML = total;
+        document.getElementById(count).innerHTML = inputVal.length;
+
+        return true;
+      }
+
+<!-- Insert value from entry box into list -->
+      function insFunction(b) {
+        var entry = b + "Entry";
+        var list = b + "List";
+        var total = b + "Total";
+
+        var n = document.getElementById(entry).value;
+        var l = document.getElementById(list);
+
+        if (n != '') {
+          var option = document.createElement("option");
+          option.text = n;
+          l.add(option);
+        }
+        document.getElementById(entry).select();
+        sumFunction(b);
+
+      }
+
+<!-- Delete value from entry box into list -->
+      function delFunction(b) {
+        var list = b + "List";
+        var entry = b + "Entry";
+
+        var inputVal = document.getElementById(list);
+
+        for (var i = 0; i < inputVal.length; i++) {
+          if (inputVal[i].selected) {
+            inputVal.remove(i);
+          }
+        }
+
+        document.getElementById(entry).select();
+        sumFunction(b);
+      }
+
+<!-- Reset entire page without reloading it. -->
+      function resetFunction(b,e) {
+        var toSelect = b + "Entry"; // When finished, element to select.
+        var elementNames = e; // Array of names to reset elements for.
+
+        for (var i in elementNames) {
+          var currElement = elementNames[i];
+          var entry = currElement + "Entry";
+          var list = currElement + "List";
+          var total = currElement + "Total";
+          var count = currElement + "Count";
+          var totalS = currElement + "TotalS";
+        
+          document.getElementById(entry).value = "";
+          document.getElementById(list).innerHTML = ""; // Doesn't seem right for a list box, but whatever.
+          document.getElementById(total).innerHTML = "";
+          document.getElementById(count).innerHTML = "";
+          document.getElementById(totalS).innerHTML = "";
+        }
+
+        document.getElementById(toSelect).select(); // Select default item.
+
+      }
+    </script>
+<!-- End script -->
+
+  </BODY>
+</HTML>
+

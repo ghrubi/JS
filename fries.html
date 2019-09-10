@@ -1,0 +1,243 @@
+<HTML>
+  <HEAD>
+  </HEAD>
+  <BODY>
+
+<!-- Outer Table -->
+    <table border=1>
+    <tr><td>
+<!-- Inner Table -->
+    <table border=0>
+<!-- Header Row -->
+      <tr>
+      </tr>
+<!-- Rolls -->
+      <tr> 
+        <td colspan=2 align=left><b><u>Rolls</u>:</b></td>
+        <td colspan=2></td>
+      </tr>
+      <tr>
+        <td width=75>Cases:</td>
+        <td width=75>Bags:</td>
+        <td width=75>LG:</td>
+        <td width=75>Half:</tr>
+      </tr>
+      <tr>
+        <td>
+          <input type="number" id="rCase" min=1 max=70 size=4 onChange="RollsCalc()">
+        </td>
+        <td>
+          <input type="number" id="rBag" min=1 max=70 size=4 onChange="RollsCalc()">
+        </td>
+        <td>
+          <input type="number" id="rLG" min=1 max=70 size=4 onChange="RollsCalc()">
+        </td>
+        <td>
+          <input type="number" id="rHalf" min=1 max=70 size=4 onChange="RollsCalc()">
+        </td>
+      </tr>
+      <tr>
+        <td colspan=4>
+          <font size=-1>
+            <div id="rCalc"></div>
+          </font>
+        </td>
+      </tr>
+<!-- Steak Fries -->
+      <tr> 
+        <td colspan=2 align=left><b><u>Steak Fries</u>:</b></td>
+        <td colspan=2></td>
+      </tr>
+      <tr>
+        <td>Cases:</td>
+        <td>Totes:</td>
+        <td>LG:</td>
+        <td>Reg:</tr>
+      </tr>
+      <tr>
+        <td>
+          <input type="number" id="ffCase" min=1 max=70 size=4 onChange="FFCalc()">
+        </td>
+        <td>
+          <input type="number" id="ffTote" min=1 max=70 size=4 onChange="FFCalc()">
+        </td>
+        <td>
+          <input type="number" id="ffLG" min=1 max=70 size=4 onChange="FFCalc()">
+        </td>
+        <td>
+          <input type="number" id="ffReg" min=1 max=70 size=4 onChange="FFCalc()">
+        </td>
+      </tr>
+      <tr>
+        <td colspan=4>
+          <font size=-1>
+            <div id="ffCalc"></div>
+          </font>
+        </td>
+      </tr>
+<!-- Curly Fries -->
+      <tr> 
+        <td colspan=2 align=left><b><u>Curly Fries</u>:</b></td>
+        <td colspan=2></td>
+      </tr>
+      <tr>
+        <td>Cases:</td>
+        <td>Totes:</td>
+        <td>LG:</td>
+        <td>Reg:</tr>
+      </tr>
+      <tr>
+        <td>
+          <input type="number" id="cfCase" min=1 max=70 size=4 onChange="CFCalc()">
+        </td>
+        <td>
+          <input type="number" id="cfTote" min=1 max=70 size=4 onChange="CFCalc()">
+        </td>
+        <td>
+          <input type="number" id="cfLG" min=1 max=70 size=4 onChange="CFCalc()">
+        </td>
+        <td>
+          <input type="number" id="cfReg" min=1 max=70 size=4 onChange="CFCalc()">
+        </td>
+      </tr>
+      <tr>
+        <td colspan=4>
+          <font size=-1>
+            <div id="cfCalc"></div>
+          </font>
+        </td>
+      </tr>
+<!-- Sweet Potato Fries -->
+      <tr> 
+        <td colspan=2 align=left><b><u>Sweet Potato Fries<u>:</b></td>
+        <td colspan=2></td>
+      </tr>
+      <tr>
+        <td>Cases:</td>
+        <td>Totes:</td>
+        <td>LG:</td>
+        <td>Reg:</tr>
+      </tr>
+      <tr>
+        <td width=50>
+          <input type="number" id="sfCase" min=1 max=70 size=4 onChange="SFCalc()">
+        </td>
+        <td>
+          <input type="number" id="sfTote" min=1 max=70 size=4 onChange="SFCalc()">
+        </td>
+        <td>
+          <input type="number" id="sfLG" min=1 max=70 size=4 onChange="SFCalc()">
+        </td>
+        <td>
+          <input type="number" id="sfReg" min=1 max=70 size=4 onChange="SFCalc()">
+        </td>
+      </tr>
+      <tr>
+        <td colspan=4>
+          <font size=-1>
+            <div id="sfCalc"></div>
+          </font>
+        </td>
+      </tr>
+<!-- Reset Button -->
+      <tr>
+        <td colspan=2></td>
+        <td colspan=2 align=center valign=center cellpadding=5>
+          <button id="ClearButton" onClick="RestForm()">Reset</button>
+        </td>
+      </tr>
+
+    </table>
+<!-- End Inner Table -->
+    </tr></td>
+    </table>
+<!-- End Outer Table -->
+
+<!-- Begin script -->
+    <script type="text/javascript">
+<!-- Rolls Calc -->
+      function RollsCalc() {
+        var caseCount = document.getElementById("rCase").value;
+        var bagCount = document.getElementById("rBag").value;
+        var eachCount = parseInt(document.getElementById("rLG").value) + (parseInt(document.getElementById("rHalf").value) * .5);
+
+        document.getElementById("rCalc").innerHTML = "Cases: " + caseCount + ", Bags: " + bagCount + ", Eaches: " + eachCount;
+      }
+
+<!-- Steak Fries Calc -->
+      function FFCalc() {
+        var lgWeightLB = 14/16; 
+        var regWeightLB = 10/16;
+        var bagWeightLB = 5; 
+        var caseCount = document.getElementById("ffCase").value;
+        var toteCount = document.getElementById("ffTote").value; // Totes are 2 bags each
+        var lgWeight = parseFloat(document.getElementById("ffLG").value) * lgWeightLB; 
+        var regWeight = parseFloat(document.getElementById("ffReg").value) * regWeightLB; 
+        var bagCount = (parseInt(toteCount) * 2);
+        bagCount += parseFloat((lgWeight + regWeight)/bagWeightLB)
+
+        document.getElementById("ffCalc").innerHTML = "Cases: " + caseCount + ", Bags: " + bagCount.toFixed(1);
+      }
+
+<!-- Curly Fries Calc -->
+      function CFCalc() {
+        var lgWeightLB = 11/16; 
+        var regWeightLB = 8/16;
+        var bagWeightLB = 4; 
+        var caseCount = document.getElementById("cfCase").value;
+        var toteCount = document.getElementById("cfTote").value; // Totes are 2 bags each
+        var lgWeight = parseFloat(document.getElementById("cfLG").value) * lgWeightLB; 
+        var regWeight = parseFloat(document.getElementById("cfReg").value) * regWeightLB; 
+        var bagCount = (parseInt(toteCount) * 2);
+        bagCount += parseFloat((lgWeight + regWeight)/bagWeightLB)
+
+        document.getElementById("cfCalc").innerHTML = "Cases: " + caseCount + ", Bags: " + bagCount.toFixed(1);
+      }
+
+<!-- Sweet Potato Fries Calc -->
+      function SFCalc() {
+        var lgWeightLB = 12/16; 
+        var regWeightLB = 8/16;
+        var bagWeightLB = 2.5; 
+        var caseCount = document.getElementById("sfCase").value;
+        var toteCount = document.getElementById("sfTote").value; // Totes are 3 bags each
+        var lgWeight = parseFloat(document.getElementById("sfLG").value) * lgWeightLB; 
+        var regWeight = parseFloat(document.getElementById("sfReg").value) * regWeightLB; 
+        var bagCount = (parseInt(toteCount) * 3);
+        bagCount += parseFloat((lgWeight + regWeight)/bagWeightLB)
+
+        document.getElementById("sfCalc").innerHTML = "Cases: " + caseCount + ", Bags: " + bagCount.toFixed(1);
+      }
+
+<!-- Reset Form -->
+      function RestForm() {
+        document.getElementById("rCase").value = "";
+        document.getElementById("rBag").value = "";
+        document.getElementById("rLG").value = "";
+        document.getElementById("rHalf").value = "";
+        document.getElementById("rCalc").innerHTML = "";
+
+        document.getElementById("ffCase").value = "";
+        document.getElementById("ffTote").value = "";
+        document.getElementById("ffLG").value = "";
+        document.getElementById("ffReg").value = "";
+        document.getElementById("ffCalc").innerHTML = "";
+
+        document.getElementById("cfCase").value = "";
+        document.getElementById("cfTote").value = "";
+        document.getElementById("cfLG").value = "";
+        document.getElementById("cfReg").value = "";
+        document.getElementById("cfCalc").innerHTML = "";
+
+        document.getElementById("sfCase").value = "";
+        document.getElementById("sfTote").value = "";
+        document.getElementById("sfLG").value = "";
+        document.getElementById("sfReg").value = "";
+        document.getElementById("sfCalc").innerHTML = "";
+      }
+    </script>
+<!-- End script -->
+
+  </BODY>
+</HTML>
+      
